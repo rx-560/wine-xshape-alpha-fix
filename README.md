@@ -38,7 +38,7 @@ This makes the visual shape survive xwayland-satellite because the shape is
 encoded directly in the alpha channel.
 
 The normal Wine behavior is unchanged unless
-`WINE_X11_BAKE_SHAPE_ALPHA=1` is set.
+`WINE_X11_BAKE_SHAPE_ALPHA` is set.
 
 ## Tested configuration
 
