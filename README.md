@@ -40,25 +40,41 @@ encoded directly in the alpha channel.
 The normal Wine behavior is unchanged unless
 `WINE_X11_BAKE_SHAPE_ALPHA=1` is set.
 
-## Tested
+## Tested configuration
 
-Tested with:
+The fix was developed and tested with:
 
-- Wine Staging 11.18
 - Gentoo Linux
-- traditional multilib Wine (`-wow64`, `ABI_X86="32 64"`)
+- Linux `7.2.8-gentoo-dist`
+- niri `26.04 (8ed0da4)`
+- Xwayland `24.1.13`
+- Mesa `26.2.3`
+  - GPU: AMD Radeon RX 9070 XT (`radeonsi`, `gfx1201`, ACO)
+- Wine Staging `11.18`
+  - `ABI_X86="32 64"`
+  - `USE=-wow64`
 - xwayland-satellite
-- niri
-- FL Studio 20
+  - custom branch: `fl-dialog-toplevel`
+  - tested commit: `67fbbd8`
+  - `git describe`: `v0.8.2-21-g67fbbd8`
+  - custom change: `_NET_WM_WINDOW_TYPE_DIALOG` windows preserve their
+    X11 `override_redirect` state when determining the Wayland window role
+  - launched through a dedicated `xwayland-satellite-fl` wrapper on display `:12`
+- FL Studio 20 (v20.1.1 build 795)
+
+> **Note:** The xwayland-satellite build used during testing was not an
+> unmodified upstream build. It includes a small custom change causing
+> `_NET_WM_WINDOW_TYPE_DIALOG` windows to preserve their X11
+> `override_redirect` state. Results with stock xwayland-satellite have
+> not yet been verified.
+
 
 Before the patch:
-- black rectangle around the FL Studio fruit window
+- black rectangle around the FL Studio fruit splash
 
 After the patch:
 - correct transparency
 - no flashing/flickering
-- normal FL Studio startup speed
-- no UI lag while the fruit animation is visible
 
 ## Usage
 
