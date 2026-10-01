@@ -106,6 +106,38 @@ Then add:
 
 to the environment of the application that needs the workaround.
 
+## Updating
+
+This patch is version-specific. If Wine Staging is upgraded, for example from 11.18 to 11.19, the patch installed under:
+
+```text
+/etc/portage/patches/app-emulation/wine-staging-11.18/
+```
+will not be applied to the new version.
+
+When updating Wine:
+
+1. Check this repository for a patch matching your new Wine version.
+2. Copy it into the matching Portage patch directory:
+   ```bash
+   sudo mkdir -p /etc/portage/patches/app-emulation/wine-staging-11.19
+
+   sudo cp patches/wine-11.19-xshape-alpha.patch \
+    /etc/portage/patches/app-emulation/wine-staging-11.19/
+   ```
+3. Rebuild Wine:
+   ```bash
+   sudo emerge -1av =app-emulation/wine-staging-11.19
+   ```
+4. Restart Wine before launching FL Studio:
+   ```bash
+   WINEPREFIX="$HOME/.wine" wineserver -k
+   ```
+
+If this repository does not yet contain a patch for the new Wine version, either keep using the previously supported Wine version or wait until the patch has been updated and tested.
+
+Do not assume a patch made for one Wine version will apply safely to another.
+
 ## Status
 
 Experimental workaround / proof of concept.
