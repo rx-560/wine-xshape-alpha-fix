@@ -23,7 +23,7 @@ black rectangle around the shaped window.
 This patch changes Wine's X11 window-surface path when the environment
 variable
 
-    WINE_X11_BAKE_SHAPE_ALPHA=1
+    WINE_X11_BAKE_SHAPE_ALPHA
 
 is set.
 
